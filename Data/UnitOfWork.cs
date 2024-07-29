@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using CaptureMatchApi.Entities;
 using CaptureMatchApi.Interfaces;
+using Microsoft.AspNetCore.Identity;
 
 namespace CaptureMatchApi.Data
 {
@@ -7,6 +9,7 @@ namespace CaptureMatchApi.Data
     {
         private readonly DataContext _context;
         private readonly IMapper _mapper;
+        private readonly UserManager<User> userManager;
 
         public UnitOfWork(DataContext context, IMapper mapper)
         {
@@ -14,7 +17,7 @@ namespace CaptureMatchApi.Data
             _mapper = mapper;
         }
 
-        public IUserRepository UserRepository => new UserRepository(_context, _mapper);
+        public IUserRepository UserRepository => new UserRepository(_context, _mapper, userManager);
 
         public async Task<bool> Complete()
         {

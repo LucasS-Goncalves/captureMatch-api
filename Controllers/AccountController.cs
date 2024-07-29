@@ -37,20 +37,18 @@ namespace CaptureMatchApi.Controllers
 
             if (!result.Succeeded) return BadRequest(result.Errors);
 
-
-
             IdentityResult roleAssignResult;
-            if (registerDto.Role == "Client")
+
+            if (registerDto.Role.ToLower() == "client")
             {
                 roleAssignResult = await _userManager.AddToRoleAsync(user, "Client");
             }
-            else if (registerDto.Role == "Photographer")
+            else if (registerDto.Role.ToLower() == "photographer")
             {
                 roleAssignResult = await _userManager.AddToRoleAsync(user, "Photographer");
             }
             else
             {
-                // Invalid role provided
                 return BadRequest("Invalid role provided");
             }
 
@@ -77,14 +75,6 @@ namespace CaptureMatchApi.Controllers
                 Token = await _tokenService.CreateToken(user),
                 UserName = user.UserName,
             };
-        }
-
-        [Authorize]
-        [HttpGet("get-users")]
-        public async Task<ActionResult> GetUsers()
-        {
-            var users = await _userManager.Users.ToListAsync();
-            return Ok(users);
         }
 
         private async Task<bool> UserExists(string userName)

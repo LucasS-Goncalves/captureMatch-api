@@ -4,19 +4,16 @@ using CaptureMatchApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace CaptureMatchApi.Migrations
+namespace CaptureMatchApi.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240530202830_RefactoringUser")]
-    partial class RefactoringUser
+    partial class DataContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,6 +64,33 @@ namespace CaptureMatchApi.Migrations
                     b.ToTable("AspNetUserRoles", (string)null);
                 });
 
+            modelBuilder.Entity("CaptureMatchApi.Entities.Photo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsProfilePicture")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("PublicId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Photos");
+                });
+
             modelBuilder.Entity("CaptureMatchApi.Entities.User", b =>
                 {
                     b.Property<string>("Id")
@@ -81,6 +105,12 @@ namespace CaptureMatchApi.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateOnly>("DateOfBirth")
+                        .HasColumnType("date");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
@@ -122,6 +152,9 @@ namespace CaptureMatchApi.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("PhotographerAboutMe")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
@@ -260,6 +293,15 @@ namespace CaptureMatchApi.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("CaptureMatchApi.Entities.Photo", b =>
+                {
+                    b.HasOne("CaptureMatchApi.Entities.User", "User")
+                        .WithMany("Photos")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("CaptureMatchApi.Entities.AppRole", null)
@@ -303,6 +345,8 @@ namespace CaptureMatchApi.Migrations
 
             modelBuilder.Entity("CaptureMatchApi.Entities.User", b =>
                 {
+                    b.Navigation("Photos");
+
                     b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618

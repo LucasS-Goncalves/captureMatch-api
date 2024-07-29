@@ -20,6 +20,8 @@ namespace CaptureMatchApi.Entities
 
         public ICollection<AppUserRole> UserRoles { get; set; }
 
+        public string Role { get; set; }
+
         public List<Photo> Photos { get; set; } = [];
         public string PhotographerAboutMe { get; set; }
     }

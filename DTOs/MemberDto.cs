@@ -22,6 +22,9 @@
 
         public DateOnly DateOfBirth { get; set; }
 
+        public string Role { get; set; }
+
+        public List<PhotoDto> Photos { get; set; }
 
         public string PhotographerAboutMe { get; set; }
         public string PhotographerSpecialties { get; set; }

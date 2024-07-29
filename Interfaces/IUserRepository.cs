@@ -1,5 +1,6 @@
 ﻿using CaptureMatchApi.DTOs;
 using CaptureMatchApi.Entities;
+using CaptureMatchApi.Helpers;
 
 namespace CaptureMatchApi.Interfaces
 {
@@ -14,5 +15,9 @@ namespace CaptureMatchApi.Interfaces
         Task<User> GetUserByUserNameAsync(string userName);
 
         Task<MemberDto> GetMemberAsync(string userName);
+
+        Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams);
+
+        Task<PagedList<MemberDto>> GetPhotographersAsync(UserParams userParams);
     }
 }

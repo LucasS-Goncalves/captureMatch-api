@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace CaptureMatchApi.Migrations
+namespace CaptureMatchApi.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240531193445_AddingPhotoLogic")]
-    partial class AddingPhotoLogic
+    [Migration("20240625195639_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -112,6 +112,9 @@ namespace CaptureMatchApi.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateOnly>("DateOfBirth")
+                        .HasColumnType("date");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -152,6 +155,9 @@ namespace CaptureMatchApi.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("PhotographerAboutMe")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")

@@ -2,6 +2,7 @@
 using CaptureMatchApi.Interfaces;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.Options;
 
 namespace CaptureMatchApi.Services

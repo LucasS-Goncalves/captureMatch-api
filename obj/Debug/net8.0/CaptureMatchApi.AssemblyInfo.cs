@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CaptureMatchApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a2201976494409f47d1ebd8477c03d148324dc7a")]
 [assembly: System.Reflection.AssemblyProductAttribute("CaptureMatchApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CaptureMatchApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
